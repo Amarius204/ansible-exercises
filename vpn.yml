@@ -1,0 +1,12 @@
+---
+- name: configure VPN server
+  hosts: ip-10-0-0-79
+  vars:
+    ansible_become: yes
+
+  roles:
+  - role: kyl191.openvpn
+    vars:
+      clients:
+      - self1
+      openvpn_server_hostname: '{{ ansible_default_ipv4.adress }}'

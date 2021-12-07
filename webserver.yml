@@ -1,0 +1,23 @@
+---
+- name: Configure web server
+  hosts: all
+
+  tasks:
+  - name: install Apache web server
+    become: yes
+    ansible.builtin.package:
+      name: httpd
+      state: present
+  - name: Copy the html file
+    become: yes
+    ansible.builtin.template:
+      src: './rsc/index.html.j2'
+      dest: '/var/www/html/index.html'
+      owner: '{{ ansible_env.USER }}'
+      group: '{{ ansible_env.USER }}'
+      mode: '0644'
+  - name: Start httpd Apache service
+    become: yes
+    ansible.builtin.service:
+      name: httpd
+      state: started
