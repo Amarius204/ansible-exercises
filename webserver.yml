@@ -1,6 +1,6 @@
 ---
 - name: Configure web server
-  hosts: all
+  hosts: ip-10-0-0-79
 
   tasks:
   - name: install Apache web server
